@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql:8.0.28
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    env_file:
+      - ./mysql-env.env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+volumes:
+  mysqldata:
+    external: true
